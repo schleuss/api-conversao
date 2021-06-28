@@ -5,7 +5,7 @@ const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
 const swaggerDocument = YAML.load('./swagger.yaml');
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument)); 
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.get('/fahrenheit/:valor/celsius', (req, res) => {
 
@@ -40,3 +40,9 @@ app.get('/temperatura/celsiusparafahrenheit/:valor', (req, res) => {
 app.listen(8080, () => {
     console.log("Servidor rodando na porta 8080");
 });
+
+var process = require('process')
+process.on('SIGINT', () => {
+    console.info("Finalizando servidor.");
+    process.exit(0);
+})
